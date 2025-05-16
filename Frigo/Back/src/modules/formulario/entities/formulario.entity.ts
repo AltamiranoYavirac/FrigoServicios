@@ -4,7 +4,7 @@ import {
   Column,
   OneToMany
 } from 'typeorm';
-import { Producto } from '../../producto/entities/producto.entity';
+
 
 @Entity('formulario')  // Ajuste: usar el nombre real de tu tabla en singular
 export class formulario {
@@ -73,11 +73,5 @@ export class formulario {
     @Column({ type: 'varchar', length: 50, nullable: true })
     recomendado: string;
 
-
-
-
-    // Relación uno a muchos con Producto
-    @OneToMany(() => Producto, (prod) => prod.formulario)
-    producto: Producto[];
 }
 
