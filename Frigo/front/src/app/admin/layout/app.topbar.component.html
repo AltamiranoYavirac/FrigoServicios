@@ -1,0 +1,92 @@
+<!-- Barra superior -->
+<div class="layout-topbar flex items-center px-6 py-4 shadow-md"
+     style="background-color: white; border-bottom: 3px solid #007BFF; box-shadow: 0 4px 10px rgba(0, 123, 255, 0.1);">
+
+  <!-- Lado izquierdo: menú + logo -->
+  <div class="flex items-center space-x-4">
+    <!-- Botón menú hamburguesa -->
+    <button #menubutton class="p-link layout-menu-button layout-topbar-button"
+            (click)="layoutService.onMenuToggle()" style="color: #FF6B00;">
+      <i class="pi pi-bars text-xl"></i>
+    </button>
+
+    <!-- Logo + texto con fondo blanco y bordes redondeados -->
+    <a routerLink="/admin"
+       style="
+         display: inline-flex;
+         align-items: center;
+         padding: 0.4rem 1rem;
+         background-color: white;
+         border-radius: 999px;
+         box-shadow: 0 4px 10px rgba(0, 123, 255, 0.1);
+         transition: all 0.2s ease;
+         text-decoration: none;
+         box-sizing: border-box;
+         outline: none;
+         margin-left: 1rem;
+       "
+       onfocus="this.style.outline='none';"
+       onmousedown="this.style.outline='none';"
+       onmouseup="this.style.outline='none';"
+       onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 6px 12px rgba(0, 123, 255, 0.2)';"
+       onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 10px rgba(0, 123, 255, 0.1)';">
+
+      <img src="https://frigoserviciosecuador.com/wp-content/uploads/2025/01/LOGO-FRIGOSERVICIOS2we3-1024x309.png"
+           alt="logo"
+           style="
+             height: 32px;
+             border-radius: 0.5rem;
+             margin-right: 0.8rem;
+             background: linear-gradient(135deg, #FF6B00, #007BFF);
+             padding: 0.2rem 0.5rem;
+             display: block;
+           " />
+
+      <span style="
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #007BFF;
+        white-space: nowrap;
+      ">
+        FRIGOSERVICIOS
+      </span>
+    </a>
+  </div>
+
+  <!-- Lado derecho: ícono de perfil y botón de menú emergente -->
+  <div class="flex items-center space-x-4 ml-auto pr-4">
+    <!-- Botón de perfil -->
+    <button
+      class="p-link flex items-center justify-center layout-topbar-button"
+      routerLink="/admin/perfil"
+      pTooltip="Ver perfil"
+      style="color: #333;">
+      <i class="pi pi-user text-2xl"></i>
+    </button>
+
+    <!-- Botón menú emergente -->
+    <button
+      class="p-link layout-menu-button layout-topbar-button"
+      (click)="perfilMenu.toggle($event)"
+      style="color: #FF6B00;"
+      pTooltip="Opciones">
+      <i class="pi pi-bars text-xl"></i>
+    </button>
+
+    <!-- Menú emergente -->
+    <p-menu #perfilMenu [popup]="true" [model]="perfilItems"></p-menu>
+  </div>
+</div>
+
+<!-- Sidebar calendario (único visible ahora) -->
+<p-sidebar
+  [(visible)]="calendarVisible"
+  [modal]="false"
+  position="right"
+  [style]="{ width: '30rem', padding: '2rem', display: 'flex', 'align-items': 'center', 'justify-content': 'center' }">
+  <div style="width: 100%; max-width: 24rem; display: flex; flex-direction: column; align-items: center;">
+    <h3>Selecciona una fecha</h3>
+    <p-calendar [(ngModel)]="selectedDate" [inline]="true" showButtonBar="true"></p-calendar>
+  </div>
+</p-sidebar>
+

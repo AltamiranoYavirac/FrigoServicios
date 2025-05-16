@@ -1,0 +1,202 @@
+<p-toast position="center"></p-toast>
+
+<div
+  class="flex justify-content-center align-items-center min-h-screen min-w-screen bg-[#f8faff] overflow-hidden"
+>
+  <div class="flex flex-column align-items-center justify-content-center">
+    <div
+      style="
+        margin-top: 5rem;
+        border-radius: 2.5rem;
+        padding: 0.5rem;
+        background: linear-gradient(
+          180deg,
+          #ff6b00 10%,
+          rgba(0, 94, 255, 0.05) 40%
+        );
+        box-shadow: 0 15px 45px rgba(0, 94, 255, 0.15);
+      "
+    >
+      <div
+        class="w-full py-10 px-6 sm:px-10"
+        style="border-radius: 2rem; background-color: white"
+      >
+        <!-- LOGO -->
+        <div class="text-center mb-6" style="margin-top: 1rem">
+          <div
+            style="
+              background: linear-gradient(135deg, #ff6b00 20%, #007bff 80%);
+              padding: 1rem 2rem;
+              display: inline-block;
+              border-radius: 1.5rem;
+              box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            "
+          >
+            <img
+              src="https://frigoserviciosecuador.com/wp-content/uploads/2025/01/LOGO-FRIGOSERVICIOS2we3-1024x309.png"
+              alt="Frigoservicios Logo"
+              style="
+                max-height: 70px;
+                filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+              "
+            />
+          </div>
+        </div>
+
+        <!-- Encabezado -->
+        <div class="text-center mb-5">
+          <div
+            style="
+              font-size: 2.5rem;
+              font-weight: bold;
+              color: #007bff;
+              text-shadow: 1px 1px 0px #e3e3e3;
+              font-family: 'Segoe UI', sans-serif;
+            "
+          >
+            🔐 Bienvenido!!!
+          </div>
+          <div style="color: #ff6b00; font-weight: 500; font-size: 1.2rem">
+            Inicia sesión en Frigoservicios
+          </div>
+        </div>
+
+        <!-- Formulario -->
+        <div [formGroup]="loginForm">
+          <!-- Email -->
+          <label
+            for="email1"
+            class="block text-xl font-semibold mb-5 mt-2"
+            style="color: #007bff"
+            >Correo electrónico</label
+          >
+          <input
+            id="email1"
+            type="text"
+            placeholder="ejemplo@email.com"
+            formControlName="email"
+            pInputText
+            class="w-full md:w-30rem mb-2"
+            style="
+              padding: 1rem;
+              border-radius: 1rem;
+              border: 1px solid #ccc;
+              background-color: #f9f9f9;
+            "
+          />
+          <p>
+            <small
+              *ngIf="
+                loginForm.get('email')?.invalid &&
+                (loginForm.get('email')?.touched ||
+                  loginForm.get('email')?.dirty)
+              "
+              class="p-error"
+            >
+              El correo debe contener un &#64;
+            </small>
+          </p>
+
+          <!-- Contraseña -->
+          <label
+            for="password1"
+            class="block font-semibold text-xl mb-2 mt-4"
+            style="color: #007bff"
+            >Contraseña</label
+          >
+          <p-password
+            id="password1"
+            placeholder="Contraseña"
+            formControlName="password"
+            styleClass="mb-2"
+            inputStyleClass="w-full p-3 md:w-30rem"
+            [feedback]="false"
+          ></p-password>
+          <p>
+            <small
+              *ngIf="
+                loginForm.get('password')?.touched &&
+                loginForm.get('password')?.value &&
+                !validPassword(loginForm.get('password')?.value || '')
+              "
+              class="p-error"
+            >
+              La contraseña debe tener mínimo 6 caracteres y al menos un
+              carácter especial.
+            </small>
+          </p>
+
+          <!-- Rol -->
+          <!--label
+            for="rol"
+            class="block font-semibold text-xl mb-2 mt-4"
+            style="color: #007bff"
+            >Rol</label
+          >
+          <p-dropdown
+            id="rol"
+            [options]="roles"
+            formControlName="rol"
+            placeholder="Selecciona un rol"
+            class="w-full md:w-30rem mb-2"
+            optionLabel="label"
+            [style]="{ 'border-radius': '1rem' }"
+          ></p-dropdown-->
+          <p>
+            <small
+              *ngIf="
+                loginForm.get('rol')?.touched && !loginForm.get('rol')?.value
+              "
+              class="p-error"
+            >
+              Debes seleccionar un rol.
+            </small>
+          </p>
+
+          <!-- Enlace olvidaste tu contraseña -->
+          <div class="flex justify-content-end mb-4 mt-4">
+            <a
+              class="font-medium no-underline text-right cursor-pointer"
+              style="color: #007bff; font-size: 1rem"
+              [routerLink]="['/auth/forgot-password']"
+            >
+              ¿Olvidaste tu contraseña?
+            </a>
+          </div>
+
+          <!-- Botón ingresar -->
+          <button
+            pButton
+            pRipple
+            label="Ingresar"
+            class="w-full p-3 text-xl mt-2"
+            (click)="funIngresar()"
+            style="
+              background-color: #ff6b00;
+              border: none;
+              color: white;
+              border-radius: 0.8rem;
+              font-weight: bold;
+            "
+          ></button>
+
+          <!-- Botón registrarse -->
+          <button
+            pButton
+            pRipple
+            label="¿No tienes cuenta? Regístrate"
+            class="w-full p-3 text-xl mt-3"
+            [routerLink]="['/auth/register']"
+            style="
+              background-color: #007bff;
+              border: none;
+              color: white;
+              border-radius: 0.8rem;
+              font-weight: bold;
+            "
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

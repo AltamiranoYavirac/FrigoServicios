@@ -1,0 +1,150 @@
+<p-toast position="center"></p-toast>
+
+<div class="flex justify-content-center align-items-center min-h-screen min-w-screen bg-[#f8faff] overflow-hidden">
+  <div class="flex flex-column align-items-center justify-content-center">
+    <!-- Tarjeta moderna -->
+    <div
+      style="
+        border-radius: 2.5rem;
+        padding: 0.5rem;
+        background: linear-gradient(180deg, #005eff 10%, rgba(0, 94, 255, 0.05) 40%);
+        box-shadow: 0 15px 45px rgba(0, 94, 255, 0.15);
+      "
+    >
+      <div class="w-full py-10 px-6 sm:px-10" style="border-radius: 2rem; background-color: white;">
+        <!-- LOGO -->
+        <div class="text-center mb-6" style="margin-top: 1.rem; border-radius: 2.5rem; padding: 1.5rem;">
+          <div
+            style="
+              background: linear-gradient(135deg, #FF6B00 20%, #007BFF 80%);
+              padding: 1rem 2rem;
+              display: inline-block;
+              border-radius: 1.5rem;
+              box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            "
+          >
+            <img
+              src="https://frigoserviciosecuador.com/wp-content/uploads/2025/01/LOGO-FRIGOSERVICIOS2we3-1024x309.png"
+              alt="Frigoservicios Logo"
+              style="max-height: 70px; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));"
+            />
+          </div>
+        </div>
+
+        <!-- Encabezado -->
+        <div class="text-center mb-5">
+          <div
+            style="font-size: 2.3rem; font-weight: bold; color: #007BFF; margin-bottom: 0.3rem; text-shadow: 1px 1px 0px #e3e3e3;"
+          >
+            📝 Registro de Usuario
+          </div>
+          <span style="color: #FF6B00; font-weight: 500;">Crea tu cuenta en Frigoservicios</span>
+        </div>
+
+        <!-- Formulario -->
+        <form (ngSubmit)="onSubmit()" #registerForm="ngForm" class="p-fluid">
+
+          <!-- NOMBRE -->
+<div class="field mb-3">
+  <label for="name" style="color: #007BFF;">Nombre</label>
+  <input
+    id="name"
+    type="text"
+    name="name"
+    pInputText
+    [(ngModel)]="formData.name"
+    required
+    pattern="^[a-zA-ZÀ-ÿ\s]+$"
+    #nameModel="ngModel"
+    style="border-radius: 0.8rem; padding: 0.9rem;"
+  />
+  <div
+    *ngIf="nameModel.invalid && nameModel.touched"
+    style="background: #ffe5e5; border-left: 6px solid #ff4d4d; padding: 1rem; border-radius: 0.7rem; margin-top: 0.5rem; font-size: 0.9rem; color: #b30000; font-weight: 500; box-shadow: 0 4px 12px rgba(255, 0, 0, 0.1);"
+  >
+    ⚠️ El nombre solo puede contener letras. No se aceptan números ni símbolos.
+  </div>
+</div>
+
+
+          <!-- USUARIO -->
+          <div class="field mb-3">
+            <label for="username" style="color: #007BFF;">Usuario</label>
+            <input
+              id="username"
+              type="text"
+              pInputText
+              [(ngModel)]="formData.username"
+              name="username"
+              required
+              style="border-radius: 0.8rem; padding: 0.9rem;"
+            />
+          </div>
+
+          <!-- CORREO -->
+          <div class="field mb-3">
+            <label for="email" style="color: #007BFF;">Correo Electrónico</label>
+            <input
+              id="email"
+              type="email"
+              pInputText
+              [(ngModel)]="formData.email"
+              name="email"
+              required
+              email
+              #emailModel="ngModel"
+              style="border-radius: 0.8rem; padding: 0.9rem;"
+            />
+            <small *ngIf="emailModel.invalid && emailModel.touched" class="p-error">
+              El correo es obligatorio y debe contener &#64; y .com
+            </small>
+          </div>
+
+          <!-- CONTRASEÑA -->
+          <div class="field mb-3">
+            <label for="password" style="color: #007BFF;">Contraseña</label>
+            <input
+              id="password"
+              type="password"
+              pPassword
+              [(ngModel)]="formData.password"
+              name="password"
+              required
+              #passwordModel="ngModel"
+              inputStyle="border-radius: 0.8rem; padding: 0.9rem;"
+            />
+            <small
+              *ngIf="(formData.password && !validPassword(formData.password)) && passwordModel.touched"
+              class="p-error"
+            >
+              La contraseña debe tener mínimo 6 caracteres y un carácter especial.
+            </small>
+          </div>
+
+          <!-- BOTÓN REGISTRO -->
+          <button
+            type="submit"
+            pButton
+            label="Registrarse"
+            class="mt-4 w-full text-xl"
+            style="
+              background: linear-gradient(90deg, #ff6b00, #ff9100);
+              border: none;
+              border-radius: 1rem;
+              color: white;
+              font-weight: bold;
+              padding: 1rem 0;
+              box-shadow: 0 6px 15px rgba(255, 107, 0, 0.3);
+              transition: all 0.3s ease;
+            "
+            onmouseover="this.style.background='linear-gradient(90deg,#ff9100,#ff6b00)'"
+            onmouseout="this.style.background='linear-gradient(90deg,#ff6b00,#ff9100)'"
+          ></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

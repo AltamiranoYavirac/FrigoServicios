@@ -1,0 +1,54 @@
+<div class="layout-wrapper" [ngClass]="containerClass">
+  <app-topbar></app-topbar>
+
+  <div class="layout-sidebar">
+      <app-sidebar></app-sidebar>
+  </div>
+
+  <div class="layout-main-container">
+      <div class="layout-main">
+          <router-outlet></router-outlet>
+
+          <!-- Fondo con imagen + capa oscura -->
+          <div *ngIf="isAdminRoute()" style="
+              position: relative;
+              min-height: 100vh;
+              background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+                          url('https://frigoserviciosecuador.com/wp-content/uploads/2025/01/male-worker-fixing-air-conditioner-at-home.jpg');
+              background-size: cover;
+              background-position: center;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+              padding: 2rem;
+              color: white;
+              font-family: 'Raleway', sans-serif;
+          ">
+              <div style="padding: 2rem; max-width: 90%;">
+                  <!-- Logo -->
+                  <img src="https://frigoserviciosecuador.com/wp-content/uploads/2025/01/LOGO-FRIGOSERVICIOS2we3-1024x309.png"
+                       alt="Frigoservicios logo"
+                       style="max-width: 360px; margin-bottom: 2rem;" />
+
+                  <!-- Frase principal: muy destacada y en negrita -->
+                  <h1 style="font-size: 4rem; font-weight: 900; color: white; margin-bottom: 1rem;">
+                      Creamos ambientes <br> confortables y eficientes
+                  </h1>
+
+                  <!-- Frase secundaria: sin negrita -->
+                  <p style="font-size: 1.5rem; font-weight: 400; color: white;">
+                      Bienvenido a Frigoservicios
+                  </p>
+              </div>
+          </div>
+      </div>
+
+      <app-footer></app-footer>
+  </div>
+
+  <app-config></app-config>
+  <div class="layout-mask"></div>
+</div>
+
+

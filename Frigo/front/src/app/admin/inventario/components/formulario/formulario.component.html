@@ -1,0 +1,266 @@
+<div class="card" style="
+    background: linear-gradient(to bottom right, #ffffff, #f0f8ff);
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    margin: 2rem auto;
+    font-family: 'Segoe UI', sans-serif;
+    max-width: 1100px;
+">
+
+    <h1 style="
+        color: #070701;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        font-size: 2rem;
+        font-weight: bold;
+        border-bottom: 3px solid #FF5733 ;
+        padding-bottom: 0.5rem;
+        text-transform: uppercase;
+    ">Formulario</h1>
+
+    <p-button (onClick)="mostrarDialog()" label="Nuevo Formulario" class="p-button-success p-button-rounded"
+        [style]="{ 'background-color': '#05b6f9', 'border': 'none' }">
+    </p-button>
+
+    <p-dialog header="Formulario" [(visible)]="dialog_visible" [modal]="true"
+        [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '30vw', 'border-radius': '1rem' }"
+        [draggable]="false" [resizable]="false" class="p-fluid" [attr.aria-modal]="true" [closeOnEscape]="true">
+
+        <form [formGroup]="formularioForm">
+            <!-- Fecha -->
+            <div class="field" style="margin-bottom: 1rem;">
+                <label for="fecha" style="font-weight: 600; color: #007acc;">Fecha</label>
+                <input type="date" pInputText id="fecha" formControlName="fecha" class="input-field" />
+                <div *ngIf="formularioForm.get('fecha')?.invalid && formularioForm.get('fecha')?.touched"
+                    class="error-message">
+                    Fecha es obligatoria y debe tener el formato correcto.
+                </div>
+            </div>
+
+            <!-- NUEVO: Hora de Ingreso -->
+            <div class="p-field p-col-12 p-md-4">
+                <label for="horaIngreso">Hora Ingreso</label>
+                <input id="horaIngreso" type="time" pInputText formControlName="horaIngreso" />
+            </div>
+
+            <!-- NUEVO: Hora de Salida -->
+            <div class="p-field p-col-12 p-md-4">
+                <label for="horaSalida">Hora Salida</label>
+                <input id="horaSalida" type="time" pInputText formControlName="horaSalida" />
+            </div>
+
+            <!-- Área -->
+            <div class="field" style="margin-bottom: 1rem;">
+                <label for="area" style="font-weight: 600; color: #007acc;">Área</label>
+                <input type="text" pInputText id="area" formControlName="area" class="input-field" />
+                <div *ngIf="formularioForm.get('area')?.invalid && formularioForm.get('area')?.touched"
+                    class="error-message">
+                    El área es obligatoria.
+                </div>
+            </div>
+
+            <!-- Marca -->
+            <div class="field" style="margin-bottom: 1rem;">
+                <label for="marca" style="font-weight: 600; color: #007acc;">Marca</label>
+                <input type="text" pInputText id="marca" formControlName="marca" class="input-field" />
+                <div *ngIf="formularioForm.get('marca')?.invalid && formularioForm.get('marca')?.touched"
+                    class="error-message">
+                    La marca es obligatoria.
+                </div>
+            </div>
+
+            <!-- Modelo -->
+            <div class="field" style="margin-bottom: 1rem;">
+                <label for="modelo" style="font-weight: 600; color: #007acc;">Modelo</label>
+                <input type="text" pInputText id="modelo" formControlName="modelo" class="input-field" />
+                <div *ngIf="formularioForm.get('modelo')?.invalid && formularioForm.get('modelo')?.touched"
+                    class="error-message">
+                    El modelo es obligatorio.
+                </div>
+            </div>
+
+            <!-- serie -->
+            <div class="field" style="margin-bottom: 1rem;">
+                <label for="serie" style="font-weight: 600; color: #007acc;">serie</label>
+                <input type="text" pInputText id="area" formControlName="serie" class="input-field" />
+                <div *ngIf="formularioForm.get('serie')?.invalid && formularioForm.get('serie')?.touched"
+                    class="error-message">
+                    El área es obligatoria.
+                </div>
+            </div>
+
+            <!-- Tipo -->
+            <div class="field" style="margin-bottom: 1rem;">
+                <label for="tipo" style="font-weight: 600; color: #007acc;">Tipo</label>
+                <input type="text" pInputText id="tipo" formControlName="tipo" class="input-field" />
+                <div *ngIf="formularioForm.get('tipo')?.invalid && formularioForm.get('tipo')?.touched"
+                    class="error-message">
+                    El tipo es obligatorio.
+                </div>
+            </div>
+
+            <!-- capacidad -->
+            <div class="field" style="margin-bottom: 1rem;">
+                <label for="capacidad" style="font-weight: 600; color: #007acc;">capacidad</label>
+                <input type="text" pInputText id="capacidad" formControlName="capacidad" class="input-field" />
+                <div *ngIf="formularioForm.get('capacidad')?.invalid && formularioForm.get('capacidadad')?.touched"
+                    class="error-message">
+                    El área es obligatoria.
+                </div>
+            </div>
+
+            <!-- refrig -->
+            <div class="field" style="margin-bottom: 1rem;">
+                <label for="refrig" style="font-weight: 600; color: #007acc;">refrig</label>
+                <input type="text" pInputText id="refrig" formControlName="refrig" class="input-field" />
+                <div *ngIf="formularioForm.get('refrig')?.invalid && formularioForm.get('refrig')?.touched"
+                    class="error-message">
+                    El área es obligatoria.
+                </div>
+            </div>
+
+            <!-- psi -->
+            <div class="field" style="margin-bottom: 1rem;">
+                <label for="psi" style="font-weight: 600; color: #007acc;">psi</label>
+                <input type="text" pInputText id="psi" formControlName="psi" class="input-field" />
+                <div *ngIf="formularioForm.get('psi')?.invalid && formularioForm.get('psi')?.touched"
+                    class="error-message">
+                    El área es obligatoria.
+                </div>
+            </div>
+
+            <!-- volts -->
+            <div class="field" style="margin-bottom: 1rem;">
+                <label for="volts" style="font-weight: 600; color: #007acc;">volts</label>
+                <input type="text" pInputText id="volts" formControlName="volts" class="input-field" />
+                <div *ngIf="formularioForm.get('volts')?.invalid && formularioForm.get('volts')?.touched"
+                    class="error-message">
+                    El área es obligatoria.
+                </div>
+            </div>
+
+            <!-- amp -->
+            <div class="field" style="margin-bottom: 1rem;">
+                <label for="amp" style="font-weight: 600; color: #007acc;">amp</label>
+                <input type="text" pInputText id="amp" formControlName="amp" class="input-field" />
+                <div *ngIf="formularioForm.get('amp')?.invalid && formularioForm.get('amp')?.touched"
+                    class="error-message">
+                    El área es obligatoria.
+                </div>
+            </div>
+
+            <!-- Descripción -->
+            <div class="field" style="margin-bottom: 1rem;">
+                <label for="descripcion" style="font-weight: 600; color: #007acc;">Descripción</label>
+                <textarea pInputTextarea id="descripcion" formControlName="descripcion" class="input-field"
+                    rows="3"></textarea>
+                <div *ngIf="formularioForm.get('descripcion')?.invalid && formularioForm.get('descripcion')?.touched"
+                    class="error-message">
+                    La descripción de trabajo es obligatoria.
+                </div>
+            </div>
+
+            <!-- Cantidad y Materiales -->
+            <div class="field" style="margin-bottom: 1rem; display: flex;">
+                <div style="width: 50%; padding-right: 10px;">
+                    <label for="cantidad" style="font-weight: 600; color: #007acc;">Cantidad</label>
+                    <input type="number" pInputText id="cantidad" formControlName="cantidad" class="input-field" />
+                    <div *ngIf="formularioForm.get('cantidad')?.invalid && formularioForm.get('cantidad')?.touched"
+                        class="error-message">
+                        La cantidad es obligatoria y debe ser un número.
+                    </div>
+                </div>
+                <div style="width: 50%; padding-left: 10px;">
+                    <label for="materiales" style="font-weight: 600; color: #007acc;">Materiales</label>
+                    <input type="text" pInputText id="materiales" formControlName="materiales" class="input-field" />
+                    <div *ngIf="formularioForm.get('materiales')?.invalid && formularioForm.get('materiales')?.touched"
+                        class="error-message">
+                        El campo es obligatorio.
+                    </div>
+                </div>
+            </div>
+
+            <!-- recomendado -->
+            <div class="field" style="margin-bottom: 1rem;">
+                <label for="recomendado" style="font-weight: 600; color: #007acc;">Recomendado</label>
+                <input type="text" pInputText id="recomendado" formControlName="recomendado" class="input-field" />
+                <div *ngIf="formularioForm.get('recomendado')?.invalid && formularioForm.get('recomendado')?.touched"
+                    class="error-message">
+                    El campo es obligatorio.
+                </div>
+            </div>
+
+        </form>
+
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" style="color: #007acc;"
+                (click)="dialog_visible=false"></button>
+            <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text p-button-success"
+                [disabled]="isSaving" (click)="guardarformulario()"></button>
+        </ng-template>
+    </p-dialog>
+
+    <!-- Tabla de Categorías -->
+    <p-table [value]="formularios" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr style="background-color: #007acc; color: rgba(18, 176, 182, 0.699);">
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Hora Ingreso</th>
+                <th>Hora Salida</th>
+                <th>Área</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Serie</th>
+                <th>Tipo</th>
+                <th>Capacidad</th>
+                <th>Refrig</th>
+                <th>PSI</th>
+                <th>Volts</th>
+                <th>Amp</th>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+                <th>Materiales</th>
+                <th>recomendado</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-formulario>
+            <tr style="background-color: #ffffff; transition: background 0.3s;"
+                onmouseover="this.style.backgroundColor='#ffe5cc'" onmouseout="this.style.backgroundColor='#ffffff'">
+                <td>{{ formulario.id }}</td>
+                <td>{{ formulario.fecha }}</td>
+                <td>{{ formulario.horaIngreso }}</td>
+                <td>{{ formulario.horaSalida }}</td>
+                <td>{{ formulario.area }}</td>
+                <td>{{ formulario.marca }}</td>
+                <td>{{ formulario.modelo }}</td>
+                <td>{{ formulario.serie }}</td>
+                <td>{{ formulario.tipo }}</td>
+                <td>{{ formulario.capacidad }}</td>
+                <td>{{ formulario.refrig }}</td>
+                <td>{{ formulario.psi }}</td>
+                <td>{{ formulario.volts }}</td>
+                <td>{{ formulario.amp }}</td>
+                <td>{{ formulario.descripcion }}</td>
+                <td>{{ formulario.cantidad }}</td>
+                <td>{{ formulario.materiales }}</td>
+                <td>{{ formulario.recomendado }}</td>
+                <td>
+                    <div class="flex" style="gap: 0.5rem;">
+                        <!--button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success"
+                            style="background-color: #f98a05; border: none;" (click)="editarformulario(formulario)">
+                        </button-->
+                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                            style="background-color: #f30d0d; border: none;" (click)="eliminarformulario(formulario)">
+                        </button>
+                        <button pButton pRipple icon="pi pi-file-pdf" class="p-button-rounded p-button-danger"
+                            style="background-color: #e53935; border: none;" (click)="generarPDFformulario(formulario)">
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</div>

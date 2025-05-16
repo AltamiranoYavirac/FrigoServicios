@@ -1,0 +1,38 @@
+<div class="card">
+  <h2>Bienvenido, en que podemos ayudarte</h2>
+
+  <form [formGroup]="clienteForm" (ngSubmit)="guardar()">
+    <div class="p-fluid p-formgrid p-grid">
+
+      <div class="p-field p-col-12">
+        <label for="nombre">Nombre o Empresa</label>
+        <input id="nombre" type="text" pInputText formControlName="nombre" />
+      </div>
+
+      <div class="p-field p-col-12 p-md-6">
+        <label for="correo">Correo Electrónico</label>
+        <input id="correo" type="email" pInputText formControlName="correo" />
+      </div>
+
+      <div class="p-field p-col-12 p-md-6">
+        <label for="telefono">Teléfono</label>
+        <input id="telefono" type="text" pInputText formControlName="telefono" />
+      </div>
+
+      <div class="p-field p-col-12">
+        <label for="direccion">Dirección</label>
+        <input id="direccion" type="text" pInputText formControlName="direccion" />
+      </div>
+
+      <div class="p-field p-col-12">
+        <label for="descripcion">Descripción del Problema</label>
+        <textarea id="descripcion" pInputTextarea pInputText rows="4" formControlName="descripcion"></textarea>
+      </div>
+
+      <div class="p-field p-col-12">
+        <button pButton type="submit" label="Guardar"></button>
+      </div>
+
+    </div>
+  </form>
+</div>

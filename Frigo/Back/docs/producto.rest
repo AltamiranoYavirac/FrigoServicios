@@ -1,0 +1,22 @@
+###Listar productos
+
+GET http://localhost:3000/producto
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJwQGhtLmNvbSIsImlkIjoxLCJpYXQiOjE3NDQzMjUyNDEsImV4cCI6MTc0NDMyNjEyMX0.rsaTGOTvi9-Kp3Oqg6QcbNewiwNnoEuXysE14Ehu-rA
+
+
+###Crear Producto
+
+POST http://localhost:3000/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJwQGhtLmNvbSIsImlkIjoxLCJpYXQiOjE3NDQzMjYyNTcsImV4cCI6MTc0NDMyNzEzN30.8TP6QgOZ0KfPMJuOpAguotRzUO4lO3pkalA6bnEauZY
+
+    {
+    "nombre": " la poderos ",
+    "precio": "7.00",
+    "stock": 1,
+    "formularioId": 1
+    }
+
+
+###Busqueda por nombre
+GET http://localhost:3000/producto/back?q=IM

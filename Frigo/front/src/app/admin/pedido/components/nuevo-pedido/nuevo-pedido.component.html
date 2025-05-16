@@ -1,0 +1,155 @@
+<div class="grid">
+    <div class="col-7">
+        <div class="text-center p-3 border-round-sm bg-primary font-bold ">Lista Productos</div>
+        <p-table #dt [value]="products" [columns]="cols" [lazy]=true [loading]="loading" [totalRecords]="totalRecords"
+            (onLazyLoad)="loadProductos($event)" responsiveLayout="scroll" [rows]="10" [paginator]="true"
+            [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+            currentPageReportTemplate="Mostrando {first} to {last} of {totalRecords} productos" [rowHover]="true"
+            dataKey="id">
+            <ng-template pTemplate="caption">
+                <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                    <h5 class="m-0">Aministrar Productos</h5>
+                    {{buscador}}
+                    <span class="block mt-2 md:mt-0 p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" placeholder="Buscar..." class="w-full sm:w-auto"
+                            [(ngModel)]="buscador" (keyup)="buscar($event)" />
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+
+                    <th pSortableColumn="id">Id <p-sortIcon field="code"></p-sortIcon></th>
+                    <th pSortableColumn="nombre">Nombre <p-sortIcon field="name"></p-sortIcon></th>
+                    <th>Image</th>
+                    <th pSortableColumn="precio">Precio <p-sortIcon field="price"></p-sortIcon></th>
+                    <th pSortableColumn="formulario_id">formulario <p-sortIcon field="category"></p-sortIcon></th>
+                    <th pSortableColumn="rating">Stock <p-sortIcon field="rating"></p-sortIcon></th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product>
+                <tr>
+
+                    <td style="width:14%; min-width:2rem;"><span class="p-column-title">Id</span>
+                        {{product.code || product.id}}
+                    </td>
+                    <td style="width:14%; min-width:10rem;">
+                        <span class="p-column-title">Nombre</span>
+                        {{product.nombre}}
+                    </td>
+                    <td style="width:14%; min-width:10rem;"><span class="p-column-title">Imagen</span>
+                        <p-image src="http://localhost:3000/producto/file/{{product.image}}" alt="Image" width="40"
+                            [preview]="true" />
+                    </td>
+                    <td style="width:2%; min-width:2rem;">
+                        <span class="p-column-title">Precio</span>
+                        {{product.precio | currency:'USD'}}
+                    </td>
+                    <td style="width:1%; min-width:2rem;">
+                        <span class="p-column-title">formulario</span>
+                        {{product.formulario?.nombre}}
+                    </td>
+
+                    <td style="width: 1%; min-width:4rem ;">
+                        <span class="p-column-title">Stock</span>
+                        {{product.stock}}
+                    </td>
+
+                    <td style="width:14%; min-width: 4rem;"><span class="p-column-title">Acciones</span>
+                        <!-- <span
+                        [class]="'product-badge status-' + (product.estado ? product.estado.toLowerCase() : '')">{{product.estado}}</span> -->
+                    </td>
+                    <td>
+                        <div class="flex">
+                            <p-button (click)="addcarrito(product)" icon="pi pi-plus" [rounded]="true"
+                                severity="success" icon="pi pi-plus"
+                                class="p-button-rounded p-button-success mr-2"></p-button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div class="col-5">
+        <div class="grid">
+            <div class="col-12">
+                <div class="card">
+                    <div class="text-center p-1 border-round-sm bg-primary font-bold ">Carrito</div>
+                    <p-table [value]="carrito">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>NOMBRE</th>
+                                <th>PRECIO</th>
+                                <th>CANT</th>
+
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-prod>
+                            <tr>
+                                <td>{{ prod.nombre }}</td>
+                                <td>{{ prod.precio }}</td>
+                                <td>{{ prod.cantidad }}</td>
+                                <td>
+                                    <td> 
+                                        <p-button (click)="aumentarCantidad(prod)" [rounded]="false" severity="info" icon="pi pi-plus" class="p-button-rounded p-button-success mr-2"></p-button>
+                                        {{ prod.cantidad }}
+                                        <p-button (click)="reducirCantidad(prod)" [rounded]="false" severity="warning" icon="pi pi-minus" class="p-button-rounded p-button-success mr-2"></p-button>
+                                    </td>
+                                <td>    
+
+                                    <p-button icon="pi pi-times" [rounded]="true" severity="danger"
+                                        (click)="quitarcarrito(prod)" />
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="text-center p-1 border-round-sm bg-primary font-bold">Cliente</div>
+                    <input pInputText type="text" placeholder="Buscar Cliente..." class="w-full sm:w-auto"
+                        [(ngModel)]="buscar_cliente" (keyup)="buscarCliente($event)">
+                    <button pButton pRipple (click)="nuevoClienteDialog()" class="ml-4 mt-1 p-button-info" label="Nuevo Cliente"></button>
+                    <div class="card" *ngIf="cliente_seleccionado.id">
+                        <h4>Cliente: #{{cliente_seleccionado.id}}</h4>
+                        <h4>Nombre: {{cliente_seleccionado.nombre_completo}}</h4>
+                        <h4>DNI: {{cliente_seleccionado.dni}}</h4>
+                        <h4>Telefono: {{cliente_seleccionado.telefono}}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="text-center p-1 border-round-sm bg-primary font-bold">Pedido</div>
+                    <button pButton pRipple (click)="generarPedido()" class="ml-4 mt-1 p-button-info" label="Generar Pedido"></button>
+
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-dialog header="Cliente" [modal]="true" [(visible)]="visible_nuevoCliente" [style]="{ width: '50rem' }" [draggable]="false" [resizable]="false" styleClass="p-fluid">
+<div class="field">
+    <label for="descripcion">Nombre Cliente:</label>
+    <input type="text" pInputText id="name" [(ngModel)]="cliente.nombre_completo" required autofocus />
+    <small class="p-error" *ngIf="submitted && !cliente.nombre_completo">Nombre es Obligatorio</small>
+</div>
+<div class="field">
+    <label for="descripcion">DNI:</label>
+    <input type="text" pInputText id="dni" [(ngModel)]="cliente.dni" autofocus />
+</div>
+<div class="field">
+    <label for="descripcion">Telefono:</label>
+    <input type="text" pInputText id="tel" [(ngModel)]="cliente.telefono" autofocus />
+</div>
+<ng-template pTemplate="footer">
+    <p-button pRipple label="Cancel" icon="pi pi-times" [text]="true" (click)="visible_nuevoCliente=false" />
+    <p-button pRipple label="Save" icon="pi pi-check" [text]="true" (click)="guardarCliente()" />
+</ng-template>
+</p-dialog>

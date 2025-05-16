@@ -1,0 +1,22 @@
+POST http://127.0.0.1:3000/auth/register
+Content-Type: application/json
+
+{
+    "name":"prueba",
+    "email": "rp@hm.com",
+    "password": "123456"
+}
+
+###login
+POST http://127.0.0.1:3000/auth/login
+Content-Type: application/json
+
+{
+    "name":"prueba",
+    "email": "rp@hm.com",
+    "password": "123456"
+}
+
+###users
+GET http://127.0.0.1:3000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJwQGhtLmNvbSIsImlkIjoxLCJpYXQiOjE3NDQxNTY5NzAsImV4cCI6MTc0NDE1Nzg1MH0.c4LgAJb71cx72xvTHn6sAMp49uiCxxO15xbaK3QsIkA

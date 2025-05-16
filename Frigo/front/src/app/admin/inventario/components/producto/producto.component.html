@@ -1,0 +1,146 @@
+<div style="display: grid;">
+  <div style="width: 100%;">
+    <div style="background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); padding: 1.5rem; color: #1f2937;">
+
+      <p-toolbar [style]="{ 'background-color': '#ffffff', 'border-bottom': '1px solid #e5e7eb', 'margin-bottom': '1rem' }">
+        <ng-template pTemplate="left">
+          <div style="margin: 0.5rem 0;">
+            <p-button label="Nuevo" icon="pi pi-plus" (click)="openNew()"
+              [style]="{ 'background-color': '#f97316', 'border': 'none', 'color': 'white', 'padding': '0.5rem 1rem', 'border-radius': '6px', 'margin-right': '0.5rem' }">
+            </p-button>
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+          <p-dropdown 
+            [options]="formularios" 
+            optionLabel="name" 
+            [showClear]="true" 
+            placeholder="filtrar por formularios"
+            [style]="{ 'border-radius': '6px', 'padding': '0.5rem', 'margin-right': '0.5rem' }">
+          </p-dropdown>
+
+          <p-button label="Exportar" icon="pi pi-upload" (click)="dt.exportCSV()"
+            [style]="{ 'background-color': '#3b82f6', 'border': 'none', 'color': 'white', 'padding': '0.5rem 1rem', 'border-radius': '6px' }">
+          </p-button>
+        </ng-template>
+      </p-toolbar>
+
+      <p-table 
+        #dt
+        [value]="products"
+        [lazy]="true"
+        [loading]="loading"
+        [totalRecords]="totalRecords"
+        responsiveLayout="scroll"
+        [rows]="10"
+        [paginator]="true"
+        [rowsPerPageOptions]="[10,20,30]"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Mostrando {first} to {last} of {totalRecords} materials"
+        [rowHover]="true"
+        dataKey="id"
+        selectionMode="single"
+        [(selection)]="selectedProduct">
+
+        <ng-template pTemplate="caption">
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <h5 style="margin: 0;">Administrar Materials</h5>
+            <span style="position: relative;">
+              <i class="pi pi-search" style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: gray;"></i>
+              <input pInputText type="text" placeholder="Buscar..." [(ngModel)]="buscador" (keyup)="buscar($event)"
+                style="padding: 0.5rem 0.5rem 0.5rem 2rem; width: 100%; border: 1px solid #cbd5e1; border-radius: 6px;" />
+            </span>
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+          <tr style="background-color: #f1f5f9; color: #1f2937;">
+            <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
+            <th pSortableColumn="nombre">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
+           
+            <th pSortableColumn="descripcion">Descripción <p-sortIcon field="descripcion"></p-sortIcon></th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-product>
+          <tr [pSelectableRow]="product">
+            <td>{{ product.code || product.id }}</td>
+            <td>{{ product.nombre }}</td>
+            
+            <td>{{ product.descripcion }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+      <!-- Botones externos -->
+      <div class="p-d-flex p-jc-end p-mt-3">
+        <p-button
+          label="Editar"
+          icon="pi pi-pencil"
+          class="p-button-warning p-mr-2"
+          (click)="onEditButton()"
+          [disabled]="!selectedProduct">
+        </p-button>
+        <p-button
+          label="Eliminar"
+          icon="pi pi-trash"
+          class="p-button-danger"
+          (click)="onDeleteButton()"
+          [disabled]="!selectedProduct">
+        </p-button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<p-dialog 
+  header="{{ isEdit ? 'Editar Material' : 'Nuevo Material' }}" 
+  [(visible)]="visible" 
+  [modal]="true"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [style]="{ width: '50vw' }"
+  [draggable]="false" 
+  [resizable]="false"
+  [closable]="true">
+
+  <div class="p-fluid p-formgrid p-grid">
+    <!-- Campo Nombre -->
+    <div class="p-field p-col-12">
+      <label for="nombre">Nombre</label>
+      <input 
+        id="nombre"
+        type="text" 
+        pInputText 
+        [(ngModel)]="nuevoMaterial.nombre" 
+        placeholder="Ingrese el nombre del material" />
+    </div>
+
+    <!-- Campo Descripción -->
+    <div class="p-field p-col-12">
+      <label for="descripcion">Descripción</label>
+      <textarea 
+        id="descripcion"
+        class="p-inputtext p-component"
+        rows="4"
+        [(ngModel)]="nuevoMaterial.descripcion"
+        placeholder="Ingrese una descripción breve..."
+        style="width: 100%; border-radius: 6px; padding: 0.75rem;">
+      </textarea>
+    </div>
+  </div>
+
+  <p-footer>
+    <div class="p-d-flex p-jc-end">
+      <button 
+        pButton 
+        type="button" 
+        label="Guardar" 
+        icon="pi pi-check" 
+        class="p-button-success"
+        (click)="guardarMaterial()">
+      </button>
+    </div>
+  </p-footer>
+</p-dialog>
