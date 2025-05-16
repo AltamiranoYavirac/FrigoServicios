@@ -2,7 +2,7 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
+import { TicketsTableComponent }      from './tickets-table/tickets-table.component';
 import { AppLayoutComponent }         from './layout/app.layout.component';
 import { formularioComponent }         from './inventario/components/formulario/formulario.component';
 import { ProductoComponent }          from './inventario/components/producto/producto.component';
@@ -12,6 +12,7 @@ import { TicketsComponent }           from './tickets/tickets.component';
 import { ClienteComponent }           from './cliente/cliente.component';
 import { ReporteComponent }           from './reporte/reporte.component';
 import { UsuariosComponent }          from './usuarios/usuarios.component';
+
 
 import { authGuard } from '../guards/auth.guard';
 
@@ -58,6 +59,11 @@ const routes: Routes = [
       {
         path: 'usuarios',
         component: UsuariosComponent,
+        canActivate: [ authGuard('admin') ]
+      },
+      {
+        path: 'tickets-table',
+        component: TicketsTableComponent,
         canActivate: [ authGuard('admin') ]
       },
       {

@@ -1,0 +1,38 @@
+<div class="card">
+  <h2>Gestión de Tickets</h2>
+
+  <div class="p-grid p-fluid">
+    <div class="p-col-6">
+      <input type="text" pInputText placeholder="Filtrar por nombre" [(ngModel)]="filtroNombre" (input)="filtrar()">
+    </div>
+    <div class="p-col-6">
+      <input type="text" pInputText placeholder="Filtrar por correo" [(ngModel)]="filtroCorreo" (input)="filtrar()">
+    </div>
+  </div>
+
+  <p-table [value]="ticketsFiltrados">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Asunto</th>
+        <th>Mensaje</th>
+        <th>Fecha</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-ticket>
+      <tr>
+        <td>{{ ticket.nombre }}</td>
+        <td>{{ ticket.correo }}</td>
+        <td>{{ ticket.asunto }}</td>
+        <td>{{ ticket.mensaje }}</td>
+        <td>{{ ticket.fechaCreacion | date:'short' }}</td>
+        <td>
+          <button pButton type="button" icon="pi pi-trash" class="p-button-danger" (click)="eliminar(ticket.id)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+

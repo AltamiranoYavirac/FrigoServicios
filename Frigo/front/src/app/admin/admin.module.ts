@@ -11,6 +11,7 @@ import { PedidoModule } from './pedido/pedido.module';
 
 import { ClienteComponent } from './cliente/cliente.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { TicketsTableComponent } from './tickets-table/tickets-table.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -32,7 +33,8 @@ import { RouterModule } from '@angular/router';
   declarations: [
     LayoutComponent,
     ClienteComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    TicketsTableComponent
   ],
   imports: [
     CommonModule,
@@ -40,6 +42,7 @@ import { RouterModule } from '@angular/router';
     AppLayoutModule,
     InventarioModule,
     PedidoModule,
+
 
     // Angular
     FormsModule,
