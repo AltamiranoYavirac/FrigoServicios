@@ -18,5 +18,6 @@ export class Ticket {
   mensaje: string;
 
   @CreateDateColumn({ type: 'timestamp' })
-  createdAt: Date;
+  fechaCreacion: Date;
 }
+

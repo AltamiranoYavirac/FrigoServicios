@@ -6,9 +6,7 @@ import { UsersModule } from './modules/users/users.module';
 import { DatabaseModule } from './database/database.module';
 import { FormularioModule } from './modules/formulario/formulario.module';
 import { PersonaModule } from './modules/persona/persona.module';
-import { ProductoModule } from './modules/producto/producto.module';
 import { RoleModule } from './modules/role/role.module';
-import { PedidoModule } from './modules/pedido/pedido.module';
 import { TicketsModule } from './modules/tickets/tickets.module';
 import { ClienteModule } from './modules/cliente/cliente.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -55,10 +53,8 @@ import { join } from 'path';
     DatabaseModule,
     FormularioModule,
     PersonaModule,
-    ProductoModule,
     RoleModule,
     ClienteModule,
-    PedidoModule,
     TicketsModule,
   ],
   controllers: [AppController],

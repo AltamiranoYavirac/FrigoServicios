@@ -5,6 +5,9 @@ import * as nodemailer from 'nodemailer';
 export class TicketsService {
   async enviarCorreo(ticket: { nombre: string; correo: string; asunto: string; mensaje: string }) {
     try {
+      
+
+
       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
