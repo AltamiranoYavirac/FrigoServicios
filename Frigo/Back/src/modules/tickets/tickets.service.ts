@@ -1,13 +1,22 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Ticket } from './entities/ticket.entity';
 import * as nodemailer from 'nodemailer';
 
 @Injectable()
 export class TicketsService {
+  constructor(
+    @InjectRepository(Ticket)
+    private readonly ticketRepository: Repository<Ticket>
+  ) {}
+
   async enviarCorreo(ticket: { nombre: string; correo: string; asunto: string; mensaje: string }) {
     try {
-      
+      // ✅ Guardar en base de datos
+      await this.ticketRepository.save(ticket);
 
-
+      // ✉️ Enviar correos
       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -51,20 +60,23 @@ Generado automáticamente desde el sistema.
         `,
       };
 
-      await Promise.all([
-        transporter.sendMail(mailToClient),
-        transporter.sendMail(mailToSupport),
-      ]);
-
-      console.log(`✅ Correos enviados correctamente a:
-- Cliente: ${ticket.correo}
-- Soporte: ${process.env.MAIL_USER}`);
-
-      return { message: 'Correos enviados al cliente y al soporte' };
+      await transporter.sendMail(mailToClient);
+      await transporter.sendMail(mailToSupport);
     } catch (error) {
-      console.error('❌ Error al enviar correos:', error);
-      throw new Error('Error al enviar correos');
+      console.error('Error al enviar o guardar el ticket:', error);
+      throw error;
     }
   }
+
+  // 🔍 Obtener todos los tickets
+  async obtenerTodos(): Promise<Ticket[]> {
+    return this.ticketRepository.find();
+  }
+
+  // 🗑 Eliminar ticket por ID
+  async eliminar(id: number): Promise<void> {
+    await this.ticketRepository.delete(id);
+  }
 }
+
 
